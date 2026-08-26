@@ -1,0 +1,45 @@
+[project]
+name = "nicolasverdon"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.141.1",
+    "matplotlib>=3.11.1",
+    "numpy>=2.5.2",
+    "pandas>=3.0.5",
+    "plotly>=7.0.0",
+    "polars>=1.44.1",
+    "ruff>=0.16.4",
+    "uvicorn>=0.52.4",
+]
+
+[tool.ruff]
+# Global settings
+line-length = 120          # Matches Black's default
+target-version = "py313"  # Assumes Python 3.13 features
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "node_modules",
+]
+
+[tool.ruff.lint]
+# Enable specific rule sets (E=pycodestyle, F=Pyflakes, I=isort, B=bugbear, UP=pyupgrade)
+select = ["E", "F", "I", "B", "UP"]
+# Ignore specific rules (e.g., line length is handled by the formatter)
+ignore = ["E501"]
+# Allow Ruff to auto-fix issues
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.format]
+# Match Black's style
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"   
