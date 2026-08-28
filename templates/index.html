@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI + HTMX</title>
+    <!-- HTMX CDN -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <h1>Welcome to Nicolas Verdon's personal website</h1>
+    
+    <!-- HTMX triggers an async request to FastAPI without a full page reload -->
+    <button htmx-get="/api/hello" hx-target="#result" hx-swap="outerHTML">
+        Click Me
+    </button>
+    
+    <div id="result"></div>
+</body>
+</html>
