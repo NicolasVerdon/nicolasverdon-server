@@ -10,6 +10,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
 from pydantic import BaseModel
+import pendulum as pdl
 
 # Database pool reference
 db_pool: asyncpg.Pool | None = None
@@ -121,6 +122,8 @@ async def get_todos():
 @app.post("/api/todos", status_code=201)
 async def create_todo(todo: TodoCreate):
     async with db_pool.acquire() as conn:
+        #convert dueDate to timestamp if provided
+        todo.dueDate = pdl.parse(todo.dueDate) if todo.dueDate else None
         row = await conn.fetchrow(
             """
             INSERT INTO todos (id, text, completed, due_date, notified)
