@@ -8,11 +8,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from pathlib import Path
 from pydantic import BaseModel
 
 # Database pool reference
 db_pool: asyncpg.Pool | None = None
 
+# Base directory for static files
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Database initialization on startup
 @asynccontextmanager
@@ -211,7 +214,7 @@ def health_check():
 # Pointing to the compiled dashboard-perso/dist output
 app.mount(
     "/dashboard",
-    StaticFiles(directory="../dashboard-perso/dist", html=True),
+    StaticFiles(directory=str(BASE_DIR / "dashboard-perso" / "dist"), html=True),
     name="dashboard",
 )
 
