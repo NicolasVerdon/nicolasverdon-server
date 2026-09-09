@@ -30,6 +30,18 @@ async def lifespan(app: FastAPI):
 
         # Create tables and default data
         async with db_pool.acquire() as conn:
+            # 1. Create users table for family members
+            await conn.execute("""
+                CREATE TABLE IF NOT EXISTS users (
+                    id BIGSERIAL PRIMARY KEY,
+                    username VARCHAR(50) UNIQUE NOT NULL,
+                    password_hash TEXT NOT NULL,
+                    mfa_secret TEXT,
+                    is_mfa_enabled BOOLEAN DEFAULT FALSE,
+                    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+                );
+            """)
+            
             await conn.execute("""
                 CREATE TABLE IF NOT EXISTS todos (
                     id BIGINT PRIMARY KEY,
