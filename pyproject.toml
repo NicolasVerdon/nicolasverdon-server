@@ -19,6 +19,7 @@ dependencies = [
     "pyotp>=2.10.0",
     "qrcode[pil]>=8.2",
     "ruff>=0.16.4",
+    "sport-toolbox",
     "uvicorn>=0.52.4",
 ]
 
@@ -50,3 +51,6 @@ quote-style = "double"
 indent-style = "space"
 skip-magic-trailing-comma = false
 line-ending = "auto"   
+
+[tool.uv.sources]
+sport-toolbox = { path = "../nicolasverdon-sport" }

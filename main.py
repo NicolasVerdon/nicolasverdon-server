@@ -13,6 +13,8 @@ from pydantic import BaseModel
 import pendulum as pdl
 import bcrypt
 import pyotp
+from nicegui import ui
+from sport_toolbox.dashboard import register_dashboard
 
 # Database pool reference
 db_pool: asyncpg.Pool | None = None
@@ -278,6 +280,14 @@ app.mount(
     StaticFiles(directory=str(BASE_DIR / "dashboard-perso" / "dist"), html=True),
     name="dashboard",
 )
+
+register_dashboard()
+
+ui.run_with(
+    app,
+    mount_path="/sport",
+    storage_secret=os.environ["NICEGUI_STORAGE_SECRET"],
+    )
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
