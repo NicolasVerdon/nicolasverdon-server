@@ -273,6 +273,9 @@ def health_check():
     return {"status": "healthy"}
 
 
+# Mount static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 # --- Mount Static Dashboard ---
 # Pointing to the compiled dashboard-perso/dist output
 app.mount(
