@@ -1,0 +1,21 @@
+{
+  "short_name": "Sport",
+  "name": "Sport Dashboard",
+  "icons": [
+    {
+      "src": "/static/sport-icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/static/sport-icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/sport/",
+  "background_color": "#121212",
+  "theme_color": "#121212",
+  "display": "standalone",
+  "orientation": "portrait"
+}
