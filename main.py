@@ -290,6 +290,7 @@ ui.run_with(
     app,
     mount_path="/sport",
     storage_secret=os.environ["NICEGUI_STORAGE_SECRET"],
+    favicon="static/sport-icon.png",
     )
 
 if __name__ == "__main__":
