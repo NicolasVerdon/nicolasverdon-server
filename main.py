@@ -1,19 +1,19 @@
 import os
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 import asyncpg
+import bcrypt
+import pendulum as pdl
+import pyotp
 import uvicorn
-from fastapi import FastAPI, HTTPException, Request, Response, Depends
+from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from pathlib import Path
-from pydantic import BaseModel
-import pendulum as pdl
-import bcrypt
-import pyotp
 from nicegui import ui
+from pydantic import BaseModel
 from sport_toolbox.dashboard import register_dashboard
 
 # Database pool reference
@@ -21,6 +21,9 @@ db_pool: asyncpg.Pool | None = None
 
 # Base directory for static files
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Path to your solid RGB icon
+ICON_PATH = Path(__file__).parent / "static" / "sport-icon.png"
 
 # Database initialization on startup
 @asynccontextmanager
@@ -123,6 +126,16 @@ class LoginRequest(BaseModel):
     username: str
     password: str
     mfa_code: str | None
+
+
+# Serve icon directly at root domain for iOS PWA installation
+@app.get("/apple-touch-icon.png", include_in_schema=False)
+@app.get("/apple-touch-icon-precomposed.png", include_in_schema=False)
+@app.get("/apple-touch-icon-120x120.png", include_in_schema=False)
+@app.get("/apple-touch-icon-120x120-precomposed.png", include_in_schema=False)
+async def serve_ios_icon():
+    return FileResponse(ICON_PATH, media_type="image/png")
+
 
 @app.post("/api/auth/login")
 async def login(data: LoginRequest, response: Response):

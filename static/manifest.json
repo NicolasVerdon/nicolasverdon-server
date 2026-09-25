@@ -1,23 +1,17 @@
 {
-  "name": "Sport Dashboard",
   "short_name": "Sport",
-  "start_url": "/sport/",
-  "scope": "/sport/",
-  "display": "standalone",
-  "background_color": "#121212",
-  "theme_color": "#121212",
+  "name": "Sport Dashboard",
   "icons": [
     {
-      "src": "/static/sport-icon.png",
-      "sizes": "192x192",
+      "src": "/apple-touch-icon.png",
       "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/static/sport-icon.png",
-      "sizes": "512x512",
-      "type": "image/png",
+      "sizes": "180x180 192x192 512x512",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "start_url": "/sport/",
+  "scope": "/sport/",
+  "background_color": "#121212",
+  "theme_color": "#121212",
+  "display": "standalone"
 }
